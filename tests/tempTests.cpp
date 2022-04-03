@@ -1,6 +1,6 @@
 #include "tempTests.hpp"
 
-void test__tabC_Class() {
+inline void test__tabC_Class() {
         try {
         _tabC a(10, "siemanowit"), b(10, "siemanowit");
         // cout << "wprowadz b: ";
@@ -26,5 +26,20 @@ void test__tabC_Class() {
     }
     catch(int& a) {
         cout << " ERROR NR.: " << a << endl;
+    }
+}
+
+inline void test__bigInt_Class() {
+    try
+    {
+        _bigInt f(_tabC(10, "0000000011"));
+        cout << "length: " << f._getString().length() << endl;
+        cout << "_bigInt a: " << f._getString() << endl;
+    }
+    catch(int& e) {
+        cout << endl << "blad: " << e << endl;
+    }
+    catch(exception& e) {
+        cout << e.what() << endl;
     }
 }

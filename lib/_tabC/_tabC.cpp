@@ -5,6 +5,7 @@ using namespace std;
 
 _tabC::_tabC(const uint64_t size, const char* msg) {
     _length = size;
+    _number = nullptr;
     _init(size);
     _fill(msg);
 }
@@ -84,7 +85,7 @@ _tabC operator+(const _tabC& a, const _tabC& b) {
     for(int i = 0; i < a._length; i++)
         result[i] = a[i];
     for(int i = 0; i < b._length; i++)
-        result[a._length - 1 + i] = b[i];
+        result[a._length + i] = b[i];
     return result;
 }
 
