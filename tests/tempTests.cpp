@@ -3,6 +3,8 @@
 void test__tabC_Class() {
         try {
         _tabC a(10, "siemanowit"), b(10, "siemanowit");
+        // cout << "wprowadz b: ";
+        // cin >> b;
         cout << "a: " << a << endl;
         cout << "b: " << b << endl;
         cout << "a + b" << a + b << endl;

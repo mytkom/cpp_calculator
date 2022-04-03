@@ -2,6 +2,7 @@
 #include <cstdint>
 #include <iostream>
 
+//simplified string class
 class _tabC {
     uint64_t _length;
     char* _number;
@@ -25,5 +26,5 @@ public:
     friend bool operator==(const _tabC&, const _tabC&);
     friend bool operator!=(const _tabC&, const _tabC&);
     friend std::ostream& operator<<(std::ostream&, const _tabC&);
-    //friend std::istream& operator>>(std::istream&, _tabC&);
+    // friend std::istream& operator>>(std::istream&, _tabC&);
 };

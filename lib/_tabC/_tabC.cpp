@@ -1,4 +1,3 @@
-#include <cstring>
 
 #include "_tabC.hpp"
 
@@ -113,7 +112,7 @@ ostream& operator<<(ostream& out, const _tabC& src) {
 
 // istream& operator>>(istream& in, _tabC& src) {
 //     char* strIn;
-//     in >> strIn;
+//     scanf("%s", &strIn);
 //     src = _tabC((uint64_t) strlen(strIn) - 1, strIn);
 //     return in;
 // }
