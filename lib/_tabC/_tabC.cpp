@@ -10,6 +10,8 @@ _tabC::_tabC(const uint64_t size, const char* msg) {
     _fill(msg);
 }
 
+_tabC::_tabC(const char* msg): _tabC{strlen(msg), msg} {}
+
 _tabC::_tabC(const uint64_t size, const char repChar):_tabC{size} {
     if(_number) {
         for(int i = 0; i < _length; i++)
@@ -139,4 +141,11 @@ void _tabC::_fill(const char* msg) {
         _number[i] = msg[i];
         i++;
     }
+}
+
+uint64_t strlen(const char* msg) {
+    uint64_t i = 0;
+    while(msg[i] != '\0')
+        i++;
+    return i;
 }

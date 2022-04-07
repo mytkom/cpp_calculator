@@ -13,11 +13,13 @@ int main() {
     // map<char, uint16_t> a = {{'a', 1}, {'b', 2}};
     // cout << a['a'] << a['b'];
     try{
-        _bigInt a(_tabC(1, "0")), b(_tabC(1, "1"));
+        _bigInt a(_tabC("1")), b(_tabC("99999"));
        cout << (a+b)._getString() << endl;
+       b += b;
+       cout << b._getString() << endl;
     }
     catch(int a) {
-        cout << a << endl;
+        cout << "Error: " << a << endl;
     }
     catch(exception& e) {
         cout << e.what() << endl;

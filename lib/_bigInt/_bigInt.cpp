@@ -19,9 +19,14 @@ bool _bigInt::_belongsToSystem(const char& src) const {
 
 void _bigInt::_getRidOfZeros() {
     if(_string == _tabC()) return;
+    if(_string.length() == 1 && _string[0] == '0') return;
     uint64_t i = 0;
-    while(_string[i] == '0') 
+    while(i < _string.length() && _string[i] == '0') 
         i++;
+    if(i == _string.length()) {
+        _string = _tabC("0");
+        return;
+    }
     uint64_t curr = i;
     _tabC temp(_string.length() - curr);
     while(i < _string.length()) {
@@ -82,3 +87,24 @@ _bigInt operator+(const _bigInt& a, const _bigInt& b) {
     if(mem) result._string = _tabC(1, _bigInt::_letters[mem]) + result._string;
     return result;
 }
+
+_bigInt& _bigInt::operator+=(const _bigInt& a) {
+    *(this) = *(this) + a;
+    return *(this);
+}
+
+ostream& operator<<(ostream& out, const _bigInt& src) {
+    out << src._string;
+    return out;
+}
+
+bool operator==(const _bigInt& a, const _bigInt& b) {
+    if(a._string == b._string && a._numberSystem == b._numberSystem)
+        return true;
+    return false;
+}
+
+bool operator!=(const _bigInt& a, const _bigInt& b) {
+    return !(a == b);
+}
+
