@@ -13,7 +13,8 @@ int main() {
     // map<char, uint16_t> a = {{'a', 1}, {'b', 2}};
     // cout << a['a'] << a['b'];
     try{
-        _bigInt a(_tabC("1")), b(_tabC("99999"));
+        _bigInt a(_tabC("98989")), b(_tabC("99999"));
+        if(a > b) cout << "a > b" << endl;
        cout << (a+b)._getString() << endl;
        b += b;
        cout << b._getString() << endl;

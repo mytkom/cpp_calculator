@@ -108,3 +108,18 @@ bool operator!=(const _bigInt& a, const _bigInt& b) {
     return !(a == b);
 }
 
+bool operator>(const _bigInt& a, const _bigInt& b) {
+    if(a._string.length() > b._string.length()) 
+        return true;
+
+    if(a._string.length() < b._string.length())
+        return false;
+
+    for(int i = 0; i < a._string.length(); ++i) {
+        if(_bigInt::_values.at(a[i]) > _bigInt::_values.at(b[i]))
+            return true;
+        if(_bigInt::_values.at(a[i]) < _bigInt::_values.at(b[i]))
+            return false;
+
+    }
+}
