@@ -1,11 +1,14 @@
 #pragma once
 #include <cstdint>
 #include <iostream>
+#include "../_number/_number.hpp"
+
 
 //simplified string class
 class _tabC {
     uint64_t _length;
-    char* _number;
+    _number* _tab_number;
+
 
     void _init(const uint64_t); 
     void _fill(const char*); 
@@ -16,8 +19,8 @@ public:
     _tabC(const _tabC&);
     ~_tabC();
     uint64_t length() const;
-    char operator[](uint64_t) const;
-    char& operator[](uint64_t);
+    _number operator[](uint64_t) const;
+    _number& operator[](uint64_t);
     _tabC& operator=(const _tabC&);
     //_tabC& operator+(const _tabC&);
 

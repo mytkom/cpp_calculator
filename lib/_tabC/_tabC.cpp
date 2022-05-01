@@ -5,7 +5,7 @@ using namespace std;
 
 _tabC::_tabC(const uint64_t size, const char* msg) {
     _length = size;
-    _number = nullptr;
+    _tab_number = nullptr;
     _init(size);
     _fill(msg);
 }
@@ -13,58 +13,58 @@ _tabC::_tabC(const uint64_t size, const char* msg) {
 _tabC::_tabC(const char* msg): _tabC{strlen(msg), msg} {}
 
 _tabC::_tabC(const uint64_t size, const char repChar):_tabC{size} {
-    if(_number) {
+    if(_tab_number) {
         for(int i = 0; i < _length; i++)
-            _number[i] = repChar;
+            _tab_number[i] = _number(repChar);
     }
 }
 
 _tabC::_tabC(const _tabC& src) {
-    if(!src._number) {
-        _number = nullptr;
+    if(!src._tab_number) {
+        _tab_number = nullptr;
         _length = 0;
     }
     else {
         _init(src._length);
         _length = src._length;
         for(int i = 0; i < _length; i++)
-            _number[i] = src._number[i];
+            _tab_number[i] = src._tab_number[i];
     }
 }
 
 _tabC::~_tabC() {
-    delete[] _number;
+    delete[] _tab_number;
 }
 
 uint64_t _tabC::length() const{
     return _length;
 }
 
-char _tabC::operator[](uint64_t i) const {
+_number _tabC::operator[](uint64_t i) const {
     if(i < _length)
-        return _number[i];
+        return _tab_number[i];
     throw 1;
 }
 
-char& _tabC::operator[](uint64_t i) {
+_number& _tabC::operator[](uint64_t i) {
     if(i < _length)
-        return _number[i];
+        return _tab_number[i];
     throw 1;
 }
 
 _tabC& _tabC::operator=(const _tabC& src) {
-    if(!src._number) {
-        _number = nullptr;
+    if(!src._tab_number) {
+        _tab_number = nullptr;
         _length = 0;
     }
     else {
-        if(_number != src._number) {
-            if(_number)
-                delete[] _number;
+        if(_tab_number != src._tab_number) {
+            if(_tab_number)
+                delete[] _tab_number;
             _init(src._length);
             _length = src._length;
             for(int i = 0; i < _length; i++)
-                _number[i] = src._number[i];
+                _tab_number[i] = src._tab_number[i];
         }
     }
 }
@@ -125,11 +125,11 @@ ostream& operator<<(ostream& out, const _tabC& src) {
 void _tabC::_init(const uint64_t size) {
     if(size == 0) return;
     try {
-    _number = new char[size];
+    _tab_number = new _number[size];
     }
     catch(const exception& e) {
         cout << e.what();
-        _number = nullptr;
+        _tab_number = nullptr;
         _length = 0;
     }
 }
@@ -138,7 +138,7 @@ void _tabC::_fill(const char* msg) {
     if(!msg) return;
     int i = 0;
     while(msg[i] != '\0' && i < _length) {
-        _number[i] = msg[i];
+        _tab_number[i] = _number(msg[i]);
         i++;
     }
 }

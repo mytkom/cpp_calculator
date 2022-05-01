@@ -8,3 +8,4 @@ errors:
 1 - out of range in _tabC
 2 - letter dont belong to number system
 3 - not the same number systems in numbers
+4 - substitution result is negative

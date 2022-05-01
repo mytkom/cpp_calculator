@@ -123,3 +123,48 @@ bool operator>(const _bigInt& a, const _bigInt& b) {
 
     }
 }
+
+bool operator>=(const _bigInt& a, const _bigInt& b) {
+    if(a == b || a > b) return true;
+}
+
+bool operator<=(const _bigInt& a, const _bigInt& b) {
+    return !(a > b);
+}
+
+bool operator<(const _bigInt& a, const _bigInt& b) {
+    return !(a >= b);
+}
+
+_bigInt operator-(const _bigInt& a, const _bigInt& b) {
+    if(a._numberSystem != b._numberSystem) throw 3;
+    if(a._string.length() < b._string.length()) throw 4;
+
+    _bigInt result(_tabC(), a._numberSystem);
+
+    uint16_t mem{0};
+    uint16_t sum{0};
+    for(int i = 0; i < a._string.length(); i++) {
+        sum = _bigInt::_values.at(a[a._string.length() - 1 - i]) +
+                _bigInt::_values.at((i < b._string.length()) ? b[b._string.length() - 1 - i] : '0') + mem;
+
+        if(sum >= a._numberSystem) {
+            mem = 1;
+            sum = sum % a._numberSystem;
+        }
+        else {
+            mem = 0;
+        }
+        
+        result._string = _tabC(1, _bigInt::_letters[sum]) + result._string;
+    }
+    if(mem) result._string = _tabC(1, _bigInt::_letters[mem]) + result._string;
+    return result;
+}
+
+/*
+operator- first
+_bigInt operator/(const _bigInt&, const _bigInt&) {
+
+}
+*/

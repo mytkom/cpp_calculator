@@ -28,6 +28,8 @@ public:
     //sum
     friend _bigInt operator+(const _bigInt&, const _bigInt&);
     _bigInt& operator+=(const _bigInt&);
+    friend _bigInt operator-(const _bigInt&, const _bigInt&);
+    _bigInt& operator-=(const _bigInt&);
 
     // TODO first
     //friend _bigInt operator/(const _bigInt&, const _bigInt&);
@@ -39,7 +41,7 @@ public:
     friend bool operator==(const _bigInt&, const _bigInt&);
     friend bool operator!=(const _bigInt&, const _bigInt&);
     friend bool operator>(const _bigInt&, const _bigInt&);
-    // friend bool operator>=(const _bigInt&, const _bigInt&);
-    // friend bool operator<=(const _bigInt&, const _bigInt&);
-    // friend bool operator<(const _bigInt&, const _bigInt&);
+    friend bool operator>=(const _bigInt&, const _bigInt&);
+    friend bool operator<=(const _bigInt&, const _bigInt&);
+    friend bool operator<(const _bigInt&, const _bigInt&);
 };
