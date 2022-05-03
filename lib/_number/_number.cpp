@@ -81,7 +81,7 @@ uint16_t getValueOfChar(const char& src) {
     return res;
 }
 
-uint16_t getCharOfInt(const uint16_t& src) {
+char getCharOfInt(const uint16_t& src) {
     char res{'\0'};
     if(src >= 0 && src <= 9) res = (char) (src + (uint16_t) '0');
     else if(src >= 10 && src <= 36) res = (char) (src - 10 + (uint16_t) 'A');

@@ -5,23 +5,16 @@
 
 using namespace std;
 
-bool _bigInt::_belongsToSystem(const char& src) const {
-    if(_numberSystem > 10) {
-        if(src >= 'A' && src <= _letters[_numberSystem - 1])
-            return true;
-    }
-    else {
-    if(src >= '0' && static_cast<int>(src) <= static_cast<int>('0') + _numberSystem - 1)
-        return true;
-    }
+bool _bigInt::_belongsToSystem(const _number& src) const {
+    if(_numberSystem > src._getVal()) return true;
     return false;
 }
 
 void _bigInt::_getRidOfZeros() {
     if(_string == _tabC()) return;
-    if(_string.length() == 1 && _string[0] == '0') return;
+    if(_string.length() == 1 && _string[0] == _number()) return;
     uint64_t i = 0;
-    while(i < _string.length() && _string[i] == '0') 
+    while(i < _string.length() && _string[i] == _number()) 
         i++;
     if(i == _string.length()) {
         _string = _tabC("0");
@@ -54,11 +47,11 @@ _tabC& _bigInt::_changeSystem(uint16_t newSystem) {
 
 }
 
-char& _bigInt::operator[](uint64_t i) {
+_number& _bigInt::operator[](uint64_t i) {
     return _string[i];
 }
 
-char _bigInt::operator[](uint64_t i) const {
+_number _bigInt::operator[](uint64_t i) const {
     return _string[i];
 }
 
@@ -71,8 +64,8 @@ _bigInt operator+(const _bigInt& a, const _bigInt& b) {
     uint16_t mem{0};
     uint16_t sum{0};
     for(int i = 0; i < a._string.length(); i++) {
-        sum = _bigInt::_values.at(a[a._string.length() - 1 - i]) +
-                _bigInt::_values.at((i < b._string.length()) ? b[b._string.length() - 1 - i] : '0') + mem;
+        sum = (a[a._string.length() - 1 - i] +
+                ((i < b._string.length()) ? b[b._string.length() - 1 - i] : (uint16_t) 0) + mem)._getVal();
 
         if(sum >= a._numberSystem) {
             mem = 1;
@@ -82,9 +75,9 @@ _bigInt operator+(const _bigInt& a, const _bigInt& b) {
             mem = 0;
         }
         
-        result._string = _tabC(1, _bigInt::_letters[sum]) + result._string;
+        result._string = _tabC(1, _number(sum)._getChar()) + result._string;
     }
-    if(mem) result._string = _tabC(1, _bigInt::_letters[mem]) + result._string;
+    if(mem) result._string = _tabC(1, _number(mem)._getChar()) + result._string;
     return result;
 }
 
@@ -116,9 +109,9 @@ bool operator>(const _bigInt& a, const _bigInt& b) {
         return false;
 
     for(int i = 0; i < a._string.length(); ++i) {
-        if(_bigInt::_values.at(a[i]) > _bigInt::_values.at(b[i]))
+        if(a[i] > b[i])
             return true;
-        if(_bigInt::_values.at(a[i]) < _bigInt::_values.at(b[i]))
+        if(a[i] < b[i])
             return false;
 
     }
@@ -145,8 +138,8 @@ _bigInt operator-(const _bigInt& a, const _bigInt& b) {
     uint16_t mem{0};
     uint16_t sum{0};
     for(int i = 0; i < a._string.length(); i++) {
-        sum = _bigInt::_values.at(a[a._string.length() - 1 - i]) +
-                _bigInt::_values.at((i < b._string.length()) ? b[b._string.length() - 1 - i] : '0') + mem;
+        sum = (a[a._string.length() - 1 - i] +
+                ((i < b._string.length()) ? b[b._string.length() - 1 - i] : '0') + mem)._getVal();
 
         if(sum >= a._numberSystem) {
             mem = 1;
@@ -156,14 +149,19 @@ _bigInt operator-(const _bigInt& a, const _bigInt& b) {
             mem = 0;
         }
         
-        result._string = _tabC(1, _bigInt::_letters[sum]) + result._string;
+        result._string = _tabC(1, _number(sum)._getChar()) + result._string;
     }
-    if(mem) result._string = _tabC(1, _bigInt::_letters[mem]) + result._string;
+    if(mem) result._string = _tabC(1, _number(mem)._getChar()) + result._string;
     return result;
 }
 
+ _bigInt& _bigInt::operator-=(const _bigInt& a) {
+    *(this) = *(this) - a;
+    return *(this);
+ }
+
+
 /*
-operator- first
 _bigInt operator/(const _bigInt&, const _bigInt&) {
 
 }

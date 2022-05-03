@@ -37,4 +37,4 @@ public:
 };
 
 uint16_t getValueOfChar(const char&);
-uint16_t getCharOfInt(const uint16_t&);
+char getCharOfInt(const uint16_t&);

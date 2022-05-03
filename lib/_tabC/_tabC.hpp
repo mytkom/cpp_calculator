@@ -14,7 +14,7 @@ class _tabC {
     void _fill(const char*); 
 public:
     _tabC(const uint64_t, const char); //repeats char
-    _tabC(const char*); //repeats char
+    _tabC(const char*);
     _tabC(const uint64_t = 0, const char* = nullptr); //rewrite const char to tabC
     _tabC(const _tabC&);
     ~_tabC();
